@@ -1,6 +1,6 @@
 {
   "name": "uwgaws",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Client Library for University of Washington's Person Web Service",
   "bugs:": {
     "url": "https://github.com/UWFosterIT/node-gaws/issues"
@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/UWFosterIT/node-gaws/"
   },
-  "author": "Marc Miles",
+  "author": "Douglas Gale",
   "main": "./lib/node/index.js",
   "keywords": [
     "uw",
@@ -36,15 +36,12 @@
     "chai": "^3.5.0",
     "debug": "^2.6.0",
     "eslint": "^3.13.1",
-    "mocha": "^3.2.0",
-    "sinon": "^1.17.7",
-    "sinon-chai": "^2.8.0"
+    "mocha": "^3.2.0"
   },
   "scripts": {
     "build": "./node_modules/.bin/babel src -s -d lib/node",
     "lint": "eslint test/**/*.js --fix; exit 0;",
-    "test": "npm run build && ./node_modules/.bin/mocha --bail --reporter dot --compilers js:babel-register --require babel-polyfill test/unit/*.js",
-    "debug": "LOG_LEVEL=debug npm run build && ./node_modules/.bin/mocha --debug-brk --bail --reporter dot --compilers js:babel-register test/unit/*.js"
+    "test": "npm run build && ./node_modules/.bin/mocha --bail --reporter dot --compilers js:babel-register --require babel-polyfill test/unit/*.js"
   },
   "engines": {
     "node": ">= v0.12.0"
