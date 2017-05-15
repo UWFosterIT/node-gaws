@@ -11,7 +11,7 @@ class Applicants extends Service {
       gradprogid: opt.gradProgId  || 0,
       year: opt.year              || 0,
       quarter: opt.quarter        || 0,
-      format: 'json'
+      format: opt.format          || 'json'
     }
     let query = qs.stringify(params);
     return this._get(`applicants?${query}`);

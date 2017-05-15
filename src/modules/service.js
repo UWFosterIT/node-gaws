@@ -87,7 +87,7 @@ class Service {
   _buildResult(response, body) {
     let result = {};
     result.statusCode = response.statusCode;
-    if (response.statusCode !== 200) {
+    if (response.statusCode != 200) {
       if (!this._isJson(body)) {
         result.message = body;
       } else {
@@ -95,7 +95,11 @@ class Service {
       }
       result.data = {};
     } else {
-      result.data = JSON.parse(body);
+      if (this._isJson(body)) {
+        result.data = JSON.parse(body);
+      } else {
+        result.data = body;
+      }
     }
     return result;
   }

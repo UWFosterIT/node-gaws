@@ -6,10 +6,10 @@ class Applications extends Service {
     super(config);
   }
 
-  getById(id, cb) {
+  getById(opt, cb) {
     let params = {
-      applId: id,
-      format: 'json'
+      applId: opt.id,
+      format: opt.format || 'json'
     }
     let query = qs.stringify(params);
     return this._get(`applications?${query}`);
@@ -20,7 +20,7 @@ class Applications extends Service {
       gradprogid: opt.gradProgId  || 0,
       year: opt.year              || 0,
       quarter: opt.quarter        || 0,
-      format: 'json'
+      format: opt.format          || 'json'
     }
     let query = qs.stringify(params);
     return this._get(`applications?${query}`);

@@ -1,15 +1,16 @@
 # UW Graduate Applicant Webervice
-This implements the [v3 Graduate Applicant Webservice](https://webdev.grad.uw.edu/grad_appl/documentation/uwnetid/version3api.html).   
+This implements the [v3 Graduate Applicant Webservice](https://webdev.grad.uw.edu/grad_appl/documentation/uwnetid/version3api.html).
 
 ## USE
 
 ### Installation
+Add the following to your `package.json` and then do a `yarn install`. Update the version number as needed.
 
-    npm install uwgaws
+    "uwgaws": "git+ssh://git@github.com/UWFosterIT/node-gaws.git#2.0.0",
 
 ### Set up
 
-Import the module and initialize it 
+Import the module and initialize it
 
 ```JavaScript
 const uwgaws = import('uwgaws');
@@ -31,14 +32,14 @@ uwgaws.initialize(config);
 ### Config options
 
 #### Base Url
-At the moment, this module only supports the v3 api. The url in the example config above is what your config should use. There is no test url. 
+At the moment, this module only supports the v3 api. The url in the example config above is what your config should use. There is no test url.
 
 #### UW x509 Client Cert
 The Graduate Applicant Webservice requires that you have a valid UW x509 Client Cert. The data returned is restricted to what is authorized for your cert.
 
 #### Caching
 
-The ``cacheMode`` can be set to any one of the following modes.  This uses the ``micro-cache`` node module as a local file system cache.  
+The ``cacheMode`` can be set to any one of the following modes.  This uses the ``micro-cache`` node module as a local file system cache.
 
 - wild: all requests go out to the internet, don't load anything from cache, doesn't save anything.
 - dryrun: Loads files from cache if exists, does http calls when cache doesn't exist, doesn't save to the cache.
@@ -47,16 +48,16 @@ The ``cacheMode`` can be set to any one of the following modes.  This uses the `
 It's recommended to use `record` during development and `wild` in producation.
 
 #### Logging
-This module uses ``winston`` for all logging. 
+This module uses ``winston`` for all logging.
 
 ### Endpoints Implemented
-All the v3 endpoints except for `documents` have been implemented. This module is currently hardcoded to request data be returned in JSON. The webservice supports returning XML. This module could be modified to accomodate that if needed. 
+All the v3 endpoints except for `documents` have been implemented. By default, all requests are made to the JSON endpoints, if you want XML as the response set `options.format` to `xml`.
 
 Endpoint|Implementation
 -|-
 gradprograms|uwgaws.programs.getAuthorized()
 applicants|uwgaws.applicants.getByProgram(options)
-applications (single)|uwgaws.applications.getById(applicationId)
+applications (single)|uwgaws.applications.getById(options)
 applications (for program)|uwgaws.applications.getByProgram(options)
 
 #### Options example and return values
@@ -75,6 +76,6 @@ For linting, this assumes you have ``eslint`` and ``babel-eslint`` installed glo
 
 Copy ``test/setup/config-sample.js`` to ``test/setup/config.js`` and edit values as needed. Use the ``npm`` commands indicated in ``package.json``.
 
-    npm build
-    npm test
-    npm lint
+    npm run build
+    npm run test
+    npm run lint

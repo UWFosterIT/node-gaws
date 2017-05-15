@@ -1,6 +1,6 @@
 {
   "name": "uwgaws",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Client Library for University of Washington's Person Web Service",
   "bugs:": {
     "url": "https://github.com/UWFosterIT/node-gaws/issues"
@@ -41,7 +41,7 @@
   "scripts": {
     "build": "./node_modules/.bin/babel src -s -d lib/node",
     "lint": "eslint test/**/*.js --fix; exit 0;",
-    "test": "npm run build && ./node_modules/.bin/mocha --bail --reporter dot --compilers js:babel-register --require babel-polyfill test/unit/*.js"
+    "test": "npm run build && ./node_modules/.bin/mocha --timeout 10s --bail --reporter dot --compilers js:babel-register --require babel-polyfill test/unit/*.js"
   },
   "engines": {
     "node": ">= v0.12.0"

@@ -36,8 +36,8 @@ describe('Graduate Applicant Web Service', function () {
         totalApps = gradPrograms.data[0].submitted_applications[0].total_applications;
         let options = {
           gradProgId: programId,
-          year:       year,
-          quarter:    quarter
+          quarter:    quarter,
+          year:       year
         };
         let applicants = await uwgaws.applicants.getByProgram(options);
         expect(applicants.statusCode).to.equal(200);
@@ -49,7 +49,7 @@ describe('Graduate Applicant Web Service', function () {
 
   describe('Applications - Get By Id', () => {
     it('Should return a full application went sent a valid application Id', async () => {
-      let app = await uwgaws.applications.getById(application.id);
+      let app = await uwgaws.applications.getById({id: application.id});
       expect(app.statusCode).to.equal(200);
       expect(app.data.id).to.equal(application.id);
       expect(app.data.gradprogID).to.equal(programId);
@@ -60,12 +60,25 @@ describe('Graduate Applicant Web Service', function () {
     it('Should return a list of full applications', async () => {
       let options = {
         gradProgId: programId,
-        year:       year,
-        quarter:    quarter
+        quarter:    quarter,
+        year:       year
       };
       let apps = await uwgaws.applications.getByProgram(options);
       expect(apps.statusCode).to.equal(200);
-      expect(apps.data.length).to.equal(total_applications);
+      expect(apps.data.length).to.equal(totalApps);
+    });
+  });
+
+  describe('Applications - Get XML By Program', () => {
+    it('Should return a list of full applications as XML', async () => {
+      let options = {
+        format:     'xml',
+        gradProgId: programId,
+        quarter:    quarter,
+        year:       year
+      };
+      let apps = await uwgaws.applications.getByProgram(options);
+      expect(apps.data).to.contain('xmlns:i="http://www.w3.org/2001/XMLSchema-instance"');
     });
   });
 

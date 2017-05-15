@@ -1,11 +1,11 @@
 let config = {
-  baseUrl:   'URL to Web Service',
-  cert:      '/FULL/PATH/TO/509Cert',
-  key:       '/FULL/PATH/TO/509Key',
-  format:    'json',
-  cacheMode: 'record',
-  cachePath: '/FULL/PATH/TO/where you want to cache http requests/',
+  baseUrl:   'https://apps.grad.uw.edu/services/applicants/v3/api/',
   cacheExt:  '.json',
+  cacheMode: 'wild',
+  cachePath: './cache/',
+  cert:      '/FULL/PATH/TO/509Cert',
+  format:    'json',
+  key:       '/FULL/PATH/TO/509Key',
   logLevel:  'info'
 };
 
