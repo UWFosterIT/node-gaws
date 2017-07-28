@@ -1,9 +1,11 @@
 # UW Graduate Applicant Webervice
+
 This implements the [v3 Graduate Applicant Webservice](https://webdev.grad.uw.edu/grad_appl/documentation/uwnetid/version3api.html).
 
 ## USE
 
 ### Installation
+
 Add the following to your `package.json` and then do a `yarn install`. Update the version number as needed.
 
     "uwgaws": "git+ssh://git@github.com/UWFosterIT/node-gaws.git#2.0.0",
@@ -32,10 +34,14 @@ uwgaws.initialize(config);
 ### Config options
 
 #### Base Url
+
 At the moment, this module only supports the v3 api. The url in the example config above is what your config should use. There is no test url.
 
 #### UW x509 Client Cert
-The Graduate Applicant Webservice requires that you have a valid UW x509 Client Cert. The data returned is restricted to what is authorized for your cert.
+
+The Graduate Applicant Web Service requires that you have a valid UW x509 Client Cert. The data returned is restricted to what is authorized for your cert.
+
+When specifying the store for the certificates, only choose one of the valid types and  edit the certInfo section of the config file accordingly. Currently only local file and s3 certificate storage locations are supported.
 
 #### Caching
 
@@ -48,9 +54,11 @@ The ``cacheMode`` can be set to any one of the following modes.  This uses the `
 It's recommended to use `record` during development and `wild` in producation.
 
 #### Logging
+
 This module uses ``winston`` for all logging.
 
 ### Endpoints Implemented
+
 All the v3 endpoints except for `documents` have been implemented. By default, all requests are made to the JSON endpoints, if you want XML as the response set `options.format` to `xml`.
 
 Endpoint|Implementation
@@ -61,6 +69,7 @@ applications (single)|uwgaws.applications.getById(options)
 applications (for program)|uwgaws.applications.getByProgram(options)
 
 #### Options example and return values
+
 ```Javascript
   let options = {
     gradProgId: 999,
@@ -68,10 +77,11 @@ applications (for program)|uwgaws.applications.getByProgram(options)
     quarter:    1
   };
 ```
-Got to  [v3 Graduate Applicant Webservice](https://webdev.grad.uw.edu/grad_appl/documentation/uwnetid/version3api.html) page for complete details.
 
+Got to  [v3 Graduate Applicant Web Service](https://webdev.grad.uw.edu/grad_appl/documentation/uwnetid/version3api.html) page for complete details.
 
 ## DEVELOPMENT
+
 For linting, this assumes you have ``eslint`` and ``babel-eslint`` installed globally ``npm install eslint@2.x babel-eslint@next -g``
 
 Copy ``test/setup/config-sample.js`` to ``test/setup/config.js`` and edit values as needed. Use the ``npm`` commands indicated in ``package.json``.

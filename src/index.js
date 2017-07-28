@@ -1,26 +1,75 @@
-import fs           from 'fs';
-import winston      from 'winston';
-import MicroCache   from 'micro-cache';
-import GradPrograms from './modules/gradprograms';
+import 'source-map-support/register';
+import Applicants   from './modules/applicants';
 import Applications from './modules/applications';
-import Applicants from './modules/applicants';
+import AWS          from 'aws-sdk';
+import fs           from 'fs';
+import GradPrograms from './modules/gradprograms';
+import MicroCache   from 'micro-cache';
+import util         from 'util';
+import winston      from 'winston';
 
-function readCertificate(cert = '', key = '') {
-  if (cert === '' || key === '' ||
-      !fs.existsSync(cert) || !fs.existsSync(key)) {
-    throw new Error(`Client cert ${cert} or key ${key} can not be found`);
+let FileCertificate = {
+  readCertificate: async (opts) => {
+    if (opts.cert === '' || opts.key === '' ||
+      !fs.existsSync(opts.cert) || !fs.existsSync(opts.key)) {
+      throw new Error(`Client cert ${opts.cert} or key ${opts.key} can not be found`);
+    }
+
+    return {
+      cert: fs.readFileSync(opts.cert),
+      key:  fs.readFileSync(opts.key)
+    };
   }
+};
 
-  return {
-    cert: fs.readFileSync(cert),
-    key:  fs.readFileSync(key)
-  };
+let S3Certificate = {
+  readCertificate: async (opts) => {
+    let s3 = new AWS.S3();
+    let cert = await s3.getObject({
+      Bucket: opts.certBucket,
+      Key:    opts.certKey
+    }).promise().catch((err) => {
+      console.log('cert error', err);
+    });
+    let key = await s3.getObject({
+      Bucket: opts.keyBucket,
+      Key:    opts.keyKey
+    }).promise();
+
+    return {
+      cert: cert.Body,
+      key:  key.Body
+    };
+  }
+};
+
+async function readCertificate(opts) {
+  let certReader;
+
+  switch (true) {
+
+    case opts.hasOwnProperty('file'):
+      certReader = Object.create(FileCertificate);
+      opts = opts.file;
+      break;
+
+    case opts.hasOwnProperty('s3'):
+      certReader = Object.create(S3Certificate);
+      opts = opts.s3;
+      break;
+
+    default:
+      throw Error('Certificate reader not supported');
+  }
+  let certs = await certReader.readCertificate(opts);
+  return certs;
+
 }
 
 let UWGAWS = {
-  initialize(options) {
+  async initialize(options) {
     let config = options;
-    config.auth = readCertificate(options.cert, options.key);
+    config.auth = await readCertificate(config.certInfo);
 
     winston.loggers.add('uwgaws', {
       console: {
@@ -30,20 +79,25 @@ let UWGAWS = {
         prettyPrint: true
       }
     });
-
-    config.log = winston.loggers.get('uwgaws');
+    this.log = winston.loggers.get('uwgaws');
+    config.log = this.log;
     config.cache = new MicroCache(
       options.cachePath,
       options.logLevel,
       options.cacheExt
     );
 
-    this.programs = new GradPrograms(config);
+    this.programs     = new GradPrograms(config);
     this.applications = new Applications(config);
-    this.applicants = new Applicants(config);
+    this.applicants   = new Applicants(config);
 
     return this;
   }
 };
 
 module.exports = UWGAWS;
+
+process.on('unhandledRejection', (reason, p) => {
+  console.error(`Promise: ${util.inspect(p)}\nReason: ${reason}`);
+  process.exit(1);
+});

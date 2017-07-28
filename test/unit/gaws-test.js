@@ -9,8 +9,8 @@ describe('Graduate Applicant Web Service', function () {
   let totalApps = 0;
   let application = {};
 
-  beforeEach(() => {
-    uwgaws.initialize(config);
+  beforeEach(async () => {
+    await uwgaws.initialize(config);
   });
 
 

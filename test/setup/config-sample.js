@@ -3,10 +3,22 @@ let config = {
   cacheExt:  '.json',
   cacheMode: 'wild',
   cachePath: './cache/',
-  cert:      '/FULL/PATH/TO/509Cert',
-  format:    'json',
-  key:       '/FULL/PATH/TO/509Key',
-  logLevel:  'info'
+  certInfo:  {
+    // Only use one cert store: file or s3.
+
+    file: {
+      cert: '/FULL/PATH/TO/509Cert',
+      key:  '/FULL/PATH/TO/509Key'
+    },
+    // s3: {
+    //   certBucket: 'BUCKET NAME',
+    //   certKey:    'OBJECT KEY',
+    //   keyBucket:  'BUCKET NAME',
+    //   keyKey:     'OBJECT KEY'
+    // }
+  },
+  format:   'json',
+  logLevel: 'info'
 };
 
 export default config;
