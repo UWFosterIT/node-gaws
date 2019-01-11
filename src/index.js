@@ -1,12 +1,11 @@
-import 'source-map-support/register';
-import Applicants   from './modules/applicants';
-import Applications from './modules/applications';
-import AWS          from 'aws-sdk';
-import fs           from 'fs';
-import GradPrograms from './modules/gradprograms';
-import MicroCache   from 'micro-cache';
-import util         from 'util';
-import winston      from 'winston';
+const Applicants = require('./modules/applicants');
+const Applications = require('./modules/applications');
+const AWS = require('aws-sdk');
+const fs = require('fs');
+const GradPrograms = require('./modules/gradprograms');
+const MicroCache = require('micro-cache');
+const util = require('util');
+const winston = require('winston');
 
 let FileCertificate = {
   readCertificate: async (opts) => {
@@ -68,7 +67,7 @@ async function readCertificate(opts) {
 
 let UWGAWS = {
   async initialize(options) {
-    let config = options;
+    let config = {...options};
     config.auth = await readCertificate(config.certInfo);
 
     winston.loggers.add('uwgaws', {
@@ -87,9 +86,9 @@ let UWGAWS = {
       options.cacheExt
     );
 
-    this.programs     = new GradPrograms(config);
+    this.programs = new GradPrograms(config);
     this.applications = new Applications(config);
-    this.applicants   = new Applicants(config);
+    this.applicants = new Applicants(config);
 
     return this;
   }

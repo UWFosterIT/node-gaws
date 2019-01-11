@@ -1,6 +1,6 @@
 {
   "name": "uwgaws",
-  "version": "3.0.2",
+  "version": "4.0.0",
   "description": "Client Library for University of Washington's Person Web Service",
   "bugs:": {
     "url": "https://github.com/UWFosterIT/node-gaws/issues"
@@ -10,7 +10,7 @@
     "url": "https://github.com/UWFosterIT/node-gaws/"
   },
   "author": "Douglas Gale",
-  "main": "./lib/node/index.js",
+  "main": "src/index.js",
   "keywords": [
     "uw",
     "graduate",
@@ -21,31 +21,24 @@
   ],
   "dependencies": {
     "@types/aws-sdk": "^2.7.0",
-    "aws-sdk": "^2.87.0",
-    "babel-preset-env": "^1.6.0",
+    "aws-sdk": "^2.232.1",
     "micro-cache": "^2.3.0",
-    "query-string": "^4.3.1",
-    "request": "^2.79.0",
-    "source-map-support": "^0.4.15",
-    "winston": "^2.3.0"
+    "query-string": "^6.1.0",
+    "request": "^2.85.0",
+    "winston": "^2.4.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-core": "^6.21.0",
-    "babel-eslint": "^7.1.1",
-    "babel-register": "^6.18.0",
-    "chai": "^3.5.0",
-    "debug": "^2.6.0",
-    "eslint": "^3.13.1",
-    "mocha": "^3.2.0"
+    "chai": "^4.1.2",
+    "debug": "^3.1.0",
+    "eslint": "^4.19.1",
+    "mocha": "^5.1.1"
   },
   "scripts": {
-    "build": "./node_modules/.bin/babel src -s -d lib/node",
     "lint": "eslint test/**/*.js --fix; exit 0;",
-    "test": "npm run build && ./node_modules/.bin/mocha --timeout 10s --bail --reporter dot --compilers js:babel-register --require babel-polyfill test/unit/*.js"
+    "test": "./node_modules/.bin/mocha --timeout 10s --bail --reporter dot test/unit/*.js"
   },
   "engines": {
-    "node": ">= v6.9.1"
+    "node": ">=8.10.0"
   },
   "license": "MIT",
   "babel": {
@@ -59,5 +52,12 @@
         }
       ]
     ]
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true
+      }
+    }
   }
 }

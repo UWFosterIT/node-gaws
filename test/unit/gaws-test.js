@@ -1,5 +1,6 @@
 /* eslint no-undef: "off" */
-import '../setup/';
+require('../setup/');
+const {inspect} = require('util');
 
 describe('Graduate Applicant Web Service', function () {
 
@@ -81,6 +82,5 @@ describe('Graduate Applicant Web Service', function () {
       expect(apps.data).to.contain('xmlns:i="http://www.w3.org/2001/XMLSchema-instance"');
     });
   });
-
 
 });

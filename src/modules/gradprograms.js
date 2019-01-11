@@ -1,4 +1,4 @@
-import Service from './service';
+const Service = require('./service');
 
 class GradPrograms extends Service {
   constructor(config) {
@@ -10,4 +10,4 @@ class GradPrograms extends Service {
   }
 }
 
-export default GradPrograms;
+module.exports = GradPrograms;

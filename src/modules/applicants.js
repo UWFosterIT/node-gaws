@@ -1,5 +1,5 @@
-import qs      from 'query-string';
-import Service from './service';
+const qs = require('query-string');
+const Service = require('./service');
 
 class Applicants extends Service {
   constructor(config) {
@@ -8,15 +8,15 @@ class Applicants extends Service {
 
   getByProgram(opt, cb) {
     let params = {
-      gradprogid: opt.gradProgId  || 0,
-      year: opt.year              || 0,
-      quarter: opt.quarter        || 0,
-      format: opt.format          || 'json'
-    }
+      format: opt.format || 'json',
+      gradprogid: opt.gradProgId || 0,
+      quarter: opt.quarter || 0,
+      year: opt.year || 0,
+    };
     let query = qs.stringify(params);
     return this._get(`applicants?${query}`);
   }
 
 }
 
-export default Applicants;
+module.exports = Applicants;

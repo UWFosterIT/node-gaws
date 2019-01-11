@@ -2,13 +2,15 @@
 
 This implements the [v3 Graduate Applicant Webservice](https://webdev.grad.uw.edu/grad_appl/documentation/uwnetid/version3api.html).
 
+Note: Version 4.0.0 and later require Node 8.10 or later.
+
 ## USE
 
 ### Installation
 
-Add the following to your `package.json` and then do a `yarn install`. Update the version number as needed.
+Add the following to your `package.json` and then do a `npm install`. Update the version number as needed.
 
-    "uwgaws": "git+ssh://git@github.com/UWFosterIT/node-gaws.git#2.0.0",
+    "uwgaws": "git+ssh://git@github.com/UWFosterIT/node-gaws.git#4.0.0",
 
 ### Set up
 
@@ -41,7 +43,7 @@ At the moment, this module only supports the v3 api. The url in the example conf
 
 The Graduate Applicant Web Service requires that you have a valid UW x509 Client Cert. The data returned is restricted to what is authorized for your cert.
 
-When specifying the store for the certificates, only choose one of the valid types and  edit the certInfo section of the config file accordingly. Currently only local file and s3 certificate storage locations are supported.
+When specifying the store for the certificates, only choose one of the valid types and edit the certInfo section of the config file accordingly. Currently only local file and s3 certificate storage locations are supported.
 
 #### Caching
 
@@ -82,10 +84,7 @@ Got to  [v3 Graduate Applicant Web Service](https://webdev.grad.uw.edu/grad_appl
 
 ## DEVELOPMENT
 
-For linting, this assumes you have ``eslint`` and ``babel-eslint`` installed globally ``npm install eslint@2.x babel-eslint@next -g``
-
 Copy ``test/setup/config-sample.js`` to ``test/setup/config.js`` and edit values as needed. Use the ``npm`` commands indicated in ``package.json``.
 
-    npm run build
     npm run test
     npm run lint

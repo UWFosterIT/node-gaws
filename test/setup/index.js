@@ -1,6 +1,6 @@
-import chai   from 'chai';
-import config from './config';
-import uwgaws from '../../lib/node/index';
+const chai = require('chai');
+const config = require('./config');
+const uwgaws = require('../../src/index');
 
 global.expect = chai.expect;
 global.config = config;

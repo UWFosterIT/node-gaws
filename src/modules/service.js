@@ -1,17 +1,17 @@
-import request from 'request';
+const request = require('request');
 
 class Service {
   constructor(config) {
     this.config = config;
-    this.log    = config.log;
-    this.cache  = config.cache;
+    this.log = config.log;
+    this.cache = config.cache;
   }
 
   _options(endpoint) {
     return {
       agentOptions: this.config.auth,
+      uri:          this.config.baseUrl + endpoint,
       uriCache:     endpoint.replace(/\//g, ''),
-      uri:          this.config.baseUrl + endpoint
     };
   }
 
@@ -94,13 +94,12 @@ class Service {
         result.message = JSON.parse(body);
       }
       result.data = {};
+    } else if (this._isJson(body)) {
+      result.data = JSON.parse(body);
     } else {
-      if (this._isJson(body)) {
-        result.data = JSON.parse(body);
-      } else {
-        result.data = body;
-      }
+      result.data = body;
     }
+
     return result;
   }
 
@@ -114,4 +113,4 @@ class Service {
   }
 }
 
-export default Service;
+module.exports = Service;
