@@ -2,6 +2,8 @@
 require('../setup/');
 const {inspect} = require('util');
 
+inspect.defaultOptions.depth = null;
+
 describe('Graduate Applicant Web Service', function () {
 
   let programId = 0;

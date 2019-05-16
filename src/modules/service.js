@@ -1,4 +1,7 @@
 const request = require('request');
+const {inspect} = require('util');
+
+inspect.defaultOptions.depth = null;
 
 class Service {
   constructor(config) {
@@ -100,6 +103,7 @@ class Service {
       result.data = body;
     }
 
+    this.log.silly(`API response body: ${inspect(result.data)}`);
     return result;
   }
 

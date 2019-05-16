@@ -1,5 +1,5 @@
 let config = {
-  baseUrl:   'https://apps.grad.uw.edu/services/applicants/v3/api/',
+  baseUrl:   'https://webapps.grad.uw.edu/services/applicants/v3/api/',
   cacheExt:  '.json',
   cacheMode: 'wild',
   cachePath: './cache/',
