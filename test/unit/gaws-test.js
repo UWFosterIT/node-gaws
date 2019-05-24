@@ -1,11 +1,10 @@
 /* eslint no-undef: "off" */
 require('../setup/');
-const {inspect} = require('util');
+const { inspect } = require('util');
 
 inspect.defaultOptions.depth = null;
 
-describe('Graduate Applicant Web Service', function () {
-
+describe('Graduate Applicant Web Service', () => {
   let programId = 0;
   let year = 0;
   let quarter = 0;
@@ -19,7 +18,7 @@ describe('Graduate Applicant Web Service', function () {
 
   describe('Programs - Get Authorized', () => {
     it('Should return a list of programs authorized to the cert used', async () => {
-      let gradPrograms = await uwgaws.programs.getAuthorized();
+      const gradPrograms = await uwgaws.programs.getAuthorized();
       expect(gradPrograms.statusCode).to.equal(200);
       expect(gradPrograms.data.length).to.be.above(0);
     });
@@ -27,7 +26,7 @@ describe('Graduate Applicant Web Service', function () {
 
   describe('Applicants - Get by program id', () => {
     it('should return all the applicants for a given P-Y-Q ', async () => {
-      let gradPrograms = await uwgaws.programs.getAuthorized();
+      const gradPrograms = await uwgaws.programs.getAuthorized();
       if (gradPrograms.statusCode === 200 && gradPrograms.data.length > 0) {
         // SHORT CUT - This test assumes that the first program returned will have at least one
         // application. It's entirely possible that you are running this test at just the wrong
@@ -37,12 +36,12 @@ describe('Graduate Applicant Web Service', function () {
         year = gradPrograms.data[0].submitted_applications[0].year;
         quarter = gradPrograms.data[0].submitted_applications[0].quarter;
         totalApps = gradPrograms.data[0].submitted_applications[0].total_applications;
-        let options = {
+        const options = {
           gradProgId: programId,
-          quarter:    quarter,
-          year:       year
+          quarter,
+          year,
         };
-        let applicants = await uwgaws.applicants.getByProgram(options);
+        const applicants = await uwgaws.applicants.getByProgram(options);
         expect(applicants.statusCode).to.equal(200);
         expect(applicants.data.length).to.equal(totalApps);
         application = applicants.data[0];
@@ -52,7 +51,7 @@ describe('Graduate Applicant Web Service', function () {
 
   describe('Applications - Get By Id', () => {
     it('Should return a full application went sent a valid application Id', async () => {
-      let app = await uwgaws.applications.getById({id: application.id});
+      const app = await uwgaws.applications.getById({ id: application.id });
       expect(app.statusCode).to.equal(200);
       expect(app.data.id).to.equal(application.id);
       expect(app.data.gradprogID).to.equal(programId);
@@ -61,12 +60,12 @@ describe('Graduate Applicant Web Service', function () {
 
   describe('Applications - Get By Program', () => {
     it('Should return a list of full applications', async () => {
-      let options = {
+      const options = {
         gradProgId: programId,
-        quarter:    quarter,
-        year:       year
+        quarter,
+        year,
       };
-      let apps = await uwgaws.applications.getByProgram(options);
+      const apps = await uwgaws.applications.getByProgram(options);
       expect(apps.statusCode).to.equal(200);
       expect(apps.data.length).to.equal(totalApps);
     });
@@ -74,15 +73,14 @@ describe('Graduate Applicant Web Service', function () {
 
   describe('Applications - Get XML By Program', () => {
     it('Should return a list of full applications as XML', async () => {
-      let options = {
-        format:     'xml',
+      const options = {
+        format: 'xml',
         gradProgId: programId,
-        quarter:    quarter,
-        year:       year
+        quarter,
+        year,
       };
-      let apps = await uwgaws.applications.getByProgram(options);
+      const apps = await uwgaws.applications.getByProgram(options);
       expect(apps.data).to.contain('xmlns:i="http://www.w3.org/2001/XMLSchema-instance"');
     });
   });
-
 });

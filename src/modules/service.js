@@ -1,5 +1,5 @@
 const request = require('request');
-const {inspect} = require('util');
+const { inspect } = require('util');
 
 inspect.defaultOptions.depth = null;
 
@@ -10,51 +10,53 @@ class Service {
     this.cache = config.cache;
   }
 
-  _options(endpoint) {
+  options(endpoint) {
     return {
       agentOptions: this.config.auth,
-      uri:          this.config.baseUrl + endpoint,
-      uriCache:     endpoint.replace(/\//g, ''),
+      uri: this.config.baseUrl + endpoint,
+      uriCache: endpoint.replace(/\//g, ''),
     };
   }
 
-  _get(endpoint) {
+  get(endpoint) {
     return new Promise((fulfill, reject) => {
       // wild    no load no save
       // dryrun  load not save
       // record  load and save
-      let options = this._options(endpoint);
+      const options = this.options(endpoint);
 
       if (this.config.cacheMode === 'wild') {
         this.log.debug(`wild -- ${options.uri}`);
         request.get(options, (err, response, body) => {
           if (!err) {
+            let bodyNotFound = null;
             if (response.statusCode === 404) {
               // special case for 404 because the Student Web Service
               // returns ugly HTML in the response body.
-              body = 'Not found.';
+              bodyNotFound = 'Not found.';
             }
-            fulfill(this._buildResult(response, body));
+            fulfill(this.buildResult(response, bodyNotFound || body));
           } else {
             reject(err);
           }
         });
       } else if (this.config.cacheMode === 'dryrun') {
         this.log.debug(`dryrun for ${options.uri}`);
-        let body = this.cache.read(options.uriCache);
+        const body = this.cache.read(options.uriCache);
         if (body) {
-          let response = {};
+          const response = {};
           response.statusCode = 200;
-          fulfill(this._buildResult(response, body));
+          fulfill(this.buildResult(response, body));
         } else {
-          request.get(options, (err, response, body) => {
+          request.get(options, (err, response, resBody) => {
             if (!err) {
+              let bodyNotFound = null;
               if (response.statusCode === 404) {
                 // special case for 404 because the Student Web Service
                 // returns ugly HTML in the response body.
-                body = 'Not found.';
+                bodyNotFound = 'Not found.';
               }
-              fulfill(this._buildResult(response, body));
+              fulfill(this.buildResult(response, bodyNotFound || resBody));
             } else {
               reject(err);
             }
@@ -62,22 +64,23 @@ class Service {
         }
       } else if (this.config.cacheMode === 'record') {
         this.log.debug(`record -- ${options.uri}`);
-        let body = this.cache.read(options.uriCache);
+        const body = this.cache.read(options.uriCache);
         if (body) {
-          let response = {};
+          const response = {};
           response.statusCode = 200;
-          fulfill(this._buildResult(response, body));
+          fulfill(this.buildResult(response, body));
         } else {
-          request.get(options, (err, response, body) => {
+          request.get(options, (err, response, resBody) => {
             if (!err) {
+              let bodyNotFound = null;
               if (response.statusCode === 200) {
-                this.cache.write(options.uriCache, body, true);
+                this.cache.write(options.uriCache, resBody, true);
               } else if (response.statusCode === 404) {
                 // special case for 404 because the Student Web Service
                 // returns ugly HTML in the response body.
-                body = 'Not found.';
+                bodyNotFound = 'Not found.';
               }
-              fulfill(this._buildResult(response, body));
+              fulfill(this.buildResult(response, bodyNotFound || resBody));
             } else {
               reject(err);
             }
@@ -87,27 +90,27 @@ class Service {
     });
   }
 
-  _buildResult(response, body) {
-    let result = {};
+  buildResult(response, body) {
+    const result = {};
     result.statusCode = response.statusCode;
-    if (response.statusCode != 200) {
-      if (!this._isJson(body)) {
+    if (response.statusCode !== 200) {
+      if (!Service.isJson(body)) {
         result.message = body;
       } else {
         result.message = JSON.parse(body);
       }
       result.data = {};
-    } else if (this._isJson(body)) {
+    } else if (Service.isJson(body)) {
       result.data = JSON.parse(body);
     } else {
       result.data = body;
     }
 
-    this.log.silly(`API response body: ${inspect(result.data)}`);
+    this.log.trace(`API response body: ${inspect(result.data)}`);
     return result;
   }
 
-  _isJson(data) {
+  static isJson(data) {
     try {
       JSON.parse(data);
     } catch (e) {

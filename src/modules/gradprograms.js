@@ -1,12 +1,8 @@
 const Service = require('./service');
 
 class GradPrograms extends Service {
-  constructor(config) {
-    super(config);
-  }
-
   getAuthorized() {
-    return this._get('gradprograms/?format=json');
+    return this.get('gradprograms/?format=json');
   }
 }
 

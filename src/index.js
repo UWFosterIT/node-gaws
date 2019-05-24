@@ -1,89 +1,99 @@
-const Applicants = require('./modules/applicants');
-const Applications = require('./modules/applications');
 const AWS = require('aws-sdk');
 const fs = require('fs');
-const GradPrograms = require('./modules/gradprograms');
+const log4js = require('log4js');
 const MicroCache = require('micro-cache');
 const util = require('util');
-const winston = require('winston');
+const Applicants = require('./modules/applicants');
+const Applications = require('./modules/applications');
+const GradPrograms = require('./modules/gradprograms');
 
-let FileCertificate = {
+const FileCertificate = {
   readCertificate: async (opts) => {
-    if (opts.cert === '' || opts.key === '' ||
-      !fs.existsSync(opts.cert) || !fs.existsSync(opts.key)) {
+    if (opts.cert === '' || opts.key === ''
+      // eslint-disable-next-line security/detect-non-literal-fs-filename
+      || !fs.existsSync(opts.cert) || !fs.existsSync(opts.key)) {
       throw new Error(`Client cert ${opts.cert} or key ${opts.key} can not be found`);
     }
 
     return {
+      // eslint-disable-next-line security/detect-non-literal-fs-filename
       cert: fs.readFileSync(opts.cert),
-      key:  fs.readFileSync(opts.key)
+      // eslint-disable-next-line security/detect-non-literal-fs-filename
+      key: fs.readFileSync(opts.key),
     };
-  }
+  },
 };
 
-let S3Certificate = {
+const S3Certificate = {
   readCertificate: async (opts) => {
-    let s3 = new AWS.S3();
-    let cert = await s3.getObject({
+    const s3 = new AWS.S3();
+    const cert = await s3.getObject({
       Bucket: opts.certBucket,
-      Key:    opts.certKey
+      Key: opts.certKey,
     }).promise().catch((err) => {
+      // eslint-disable-next-line no-console
       console.log('cert error', err);
     });
-    let key = await s3.getObject({
+    const key = await s3.getObject({
       Bucket: opts.keyBucket,
-      Key:    opts.keyKey
+      Key: opts.keyKey,
     }).promise();
 
     return {
       cert: cert.Body,
-      key:  key.Body
+      key: key.Body,
     };
-  }
+  },
 };
 
-async function readCertificate(opts) {
+async function readCertificate(options) {
   let certReader;
+  let opts;
 
   switch (true) {
-
-    case opts.hasOwnProperty('file'):
+    case Object.prototype.hasOwnProperty.call(options, 'file'):
       certReader = Object.create(FileCertificate);
-      opts = opts.file;
+      opts = options.file;
       break;
 
-    case opts.hasOwnProperty('s3'):
+    case Object.prototype.hasOwnProperty.call(options, 's3'):
       certReader = Object.create(S3Certificate);
-      opts = opts.s3;
+      opts = options.s3;
       break;
 
     default:
       throw Error('Certificate reader not supported');
   }
-  let certs = await certReader.readCertificate(opts);
+  const certs = await certReader.readCertificate(opts);
   return certs;
-
 }
 
-let UWGAWS = {
+const UWGAWS = {
   async initialize(options) {
-    let config = {...options};
+    const config = { ...options };
     config.auth = await readCertificate(config.certInfo);
 
-    winston.loggers.add('uwgaws', {
-      console: {
-        colorize:    true,
-        label:       'uwgaws',
-        level:       process.env.LOG_LEVEL || options.logLevel,
-        prettyPrint: true
-      }
+    log4js.configure({
+      appenders: {
+        out: {
+          layout: { type: 'colored' },
+          type: 'stdout',
+        },
+      },
+      categories: {
+        default: {
+          appenders: ['out'],
+          level: process.env.LOG_LEVEL || config.logLevel || 'info',
+        },
+      },
     });
-    this.log = winston.loggers.get('uwgaws');
-    config.log = this.log;
+
+    config.log = log4js.getLogger();
+
     config.cache = new MicroCache(
       options.cachePath,
       options.logLevel,
-      options.cacheExt
+      options.cacheExt,
     );
 
     this.programs = new GradPrograms(config);
@@ -91,12 +101,13 @@ let UWGAWS = {
     this.applicants = new Applicants(config);
 
     return this;
-  }
+  },
 };
 
 module.exports = UWGAWS;
 
 process.on('unhandledRejection', (reason, p) => {
+  // eslint-disable-next-line no-console
   console.error(`Promise: ${util.inspect(p)}\nReason: ${reason}`);
   process.exit(1);
 });

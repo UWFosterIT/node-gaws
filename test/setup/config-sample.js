@@ -1,14 +1,14 @@
-let config = {
-  baseUrl:   'https://webapps.grad.uw.edu/services/applicants/v3/api/',
-  cacheExt:  '.json',
+const config = {
+  baseUrl: 'https://webapps.grad.uw.edu/services/applicants/v3/api/',
+  cacheExt: '.json',
   cacheMode: 'wild',
   cachePath: './cache/',
-  certInfo:  {
+  certInfo: {
     // Only use one cert store: file or s3.
 
     file: {
       cert: '/FULL/PATH/TO/509Cert',
-      key:  '/FULL/PATH/TO/509Key'
+      key: '/FULL/PATH/TO/509Key',
     },
     // s3: {
     //   certBucket: 'BUCKET NAME',
@@ -17,8 +17,8 @@ let config = {
     //   keyKey:     'OBJECT KEY'
     // }
   },
-  format:   'json',
-  logLevel: 'info'
+  format: 'json',
+  logLevel: 'info',
 };
 
 export default config;
