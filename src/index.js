@@ -1,6 +1,6 @@
 const AWS = require('aws-sdk');
 const fs = require('fs');
-const log4js = require('log4js');
+const log4js = require('@log4js-node/log4js-api');
 const MicroCache = require('micro-cache');
 const util = require('util');
 const Applicants = require('./modules/applicants');
@@ -73,22 +73,7 @@ const UWGAWS = {
     const config = { ...options };
     config.auth = await readCertificate(config.certInfo);
 
-    log4js.configure({
-      appenders: {
-        out: {
-          layout: { type: 'colored' },
-          type: 'stdout',
-        },
-      },
-      categories: {
-        default: {
-          appenders: ['out'],
-          level: process.env.LOG_LEVEL || config.logLevel || 'info',
-        },
-      },
-    });
-
-    config.log = log4js.getLogger();
+    config.log = log4js.getLogger('node-gaws');
 
     config.cache = new MicroCache(
       options.cachePath,
