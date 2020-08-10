@@ -1,6 +1,6 @@
 # UW Graduate Applicant Webervice
 
-This implements the [v3 Graduate Applicant Webservice](https://webdev.grad.uw.edu/grad_appl/documentation/uwnetid/version3api.html).
+This implements the [v3 Graduate Applicant Webservice](https://devweb.grad.uw.edu/services/documentation/index.htm).
 
 Note: Version 4.0.0 and later require Node 8.10 or later.
 
@@ -80,7 +80,7 @@ applications (for program)|uwgaws.applications.getByProgram(options)
   };
 ```
 
-Got to  [v3 Graduate Applicant Web Service](https://webdev.grad.uw.edu/grad_appl/documentation/uwnetid/version3api.html) page for complete details.
+Got to  [v3 Graduate Applicant Web Service](https://devweb.grad.uw.edu/services/documentation/index.htm) page for complete details.
 
 ## DEVELOPMENT
 
