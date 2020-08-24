@@ -17,6 +17,7 @@ class Applications extends Service {
       gradprogid: opt.gradProgId || 0,
       quarter: opt.quarter || 0,
       year: opt.year || 0,
+      val: 1,
     };
     const query = qs.stringify(params);
     return this.get(`applications?${query}`);

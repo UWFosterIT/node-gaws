@@ -21,25 +21,25 @@
   ],
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "aws-sdk": "^2.463.0",
+    "aws-sdk": "^2.739.0",
     "micro-cache": "^2.3.0",
-    "query-string": "^6.5.0",
-    "request": "^2.88.0"
+    "query-string": "^6.13.1",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@types/log4js": "^2.3.5",
     "chai": "^4.2.0",
     "debug": "^4.1.1",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-security": "^1.4.0",
-    "log4js": "^4.3.0",
-    "mocha": "^6.1.4"
+    "log4js": "^6.3.0",
+    "mocha": "^8.1.1"
   },
   "scripts": {
     "lint": "eslint test/**/*.js --fix; exit 0;",
-    "test": "./node_modules/.bin/mocha --timeout 10s --bail --reporter dot test/unit/*.js"
+    "test": "./node_modules/.bin/mocha --timeout 30s --bail --reporter dot test/unit/*.js"
   },
   "engines": {
     "node": ">=8.10.0"
