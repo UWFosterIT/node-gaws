@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "aws-sdk": "^2.739.0",
+    "aws-sdk": "^2.741.0",
     "micro-cache": "^2.3.0",
     "query-string": "^6.13.1",
     "request": "^2.88.2"
@@ -35,7 +35,7 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-security": "^1.4.0",
     "log4js": "^6.3.0",
-    "mocha": "^8.1.1"
+    "mocha": "^8.1.2"
   },
   "scripts": {
     "lint": "eslint test/**/*.js --fix; exit 0;",
