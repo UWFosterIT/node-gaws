@@ -65,7 +65,10 @@ describe('Graduate Applicant Web Service', () => {
         quarter,
         year,
       };
-      const apps = await uwgaws.applications.getByProgram(options);
+      const apps = await uwgaws.applications.getByProgram(options).catch(err => console.log(err));
+      if (apps.statusCode !== 200) {
+        console.log(apps);
+      }
       expect(apps.statusCode).to.equal(200);
       expect(apps.data.length).to.equal(totalApps);
     });
@@ -79,8 +82,26 @@ describe('Graduate Applicant Web Service', () => {
         quarter,
         year,
       };
-      const apps = await uwgaws.applications.getByProgram(options);
+      const apps = await uwgaws.applications.getByProgram(options).catch(err => console.log(err));
+      if (apps.statusCode !== 200) {
+        console.log(apps);
+      }
       expect(apps.data).to.contain('xmlns:i="http://www.w3.org/2001/XMLSchema-instance"');
+    });
+  });
+
+  describe('Applications - Get By Program 19', () => {
+    it('Should return a list of full applications', async () => {
+      const options = {
+        gradProgId: 19,
+        quarter: 4,
+        year: 2020,
+      };
+      const apps = await uwgaws.applications.getByProgram(options).catch(err => console.log(err));
+      if (apps.statusCode !== 200) {
+        console.log(apps);
+      }
+      expect(apps.statusCode).to.equal(200);
     });
   });
 });
