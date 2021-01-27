@@ -1,5 +1,5 @@
 /* eslint no-undef: "off" */
-require('../setup/');
+require('../setup');
 const { inspect } = require('util');
 
 inspect.defaultOptions.depth = null;
@@ -14,7 +14,6 @@ describe('Graduate Applicant Web Service', () => {
   beforeEach(async () => {
     await uwgaws.initialize(config);
   });
-
 
   describe('Programs - Get Authorized', () => {
     it('Should return a list of programs authorized to the cert used', async () => {
@@ -31,7 +30,8 @@ describe('Graduate Applicant Web Service', () => {
         // SHORT CUT - This test assumes that the first program returned will have at least one
         // application. It's entirely possible that you are running this test at just the wrong
         // time and there are no applications in the first program. In which case you will
-        // have  to rewrite this to loop through the data instead of grabbing the first entry. Sorry. =(
+        // have  to rewrite this to loop through the data instead of grabbing
+        // the first entry. Sorry. =(
         programId = gradPrograms.data[0].gradprogID;
         year = gradPrograms.data[0].submitted_applications[0].year;
         quarter = gradPrograms.data[0].submitted_applications[0].quarter;
@@ -50,7 +50,7 @@ describe('Graduate Applicant Web Service', () => {
   });
 
   describe('Applications - Get By Id', () => {
-    it('Should return a full application went sent a valid application Id', async () => {
+    it('Should return a full application when sent a valid application Id', async () => {
       const app = await uwgaws.applications.getById({ id: application.id });
       expect(app.statusCode).to.equal(200);
       expect(app.data.id).to.equal(application.id);
@@ -65,7 +65,7 @@ describe('Graduate Applicant Web Service', () => {
         quarter,
         year,
       };
-      const apps = await uwgaws.applications.getByProgram(options).catch(err => console.log(err));
+      const apps = await uwgaws.applications.getByProgram(options).catch((err) => console.log(err));
       if (apps.statusCode !== 200) {
         console.log(apps);
       }
@@ -82,7 +82,7 @@ describe('Graduate Applicant Web Service', () => {
         quarter,
         year,
       };
-      const apps = await uwgaws.applications.getByProgram(options).catch(err => console.log(err));
+      const apps = await uwgaws.applications.getByProgram(options).catch((err) => console.log(err));
       if (apps.statusCode !== 200) {
         console.log(apps);
       }
@@ -95,9 +95,9 @@ describe('Graduate Applicant Web Service', () => {
       const options = {
         gradProgId: 19,
         quarter: 4,
-        year: 2020,
+        year: 2021,
       };
-      const apps = await uwgaws.applications.getByProgram(options).catch(err => console.log(err));
+      const apps = await uwgaws.applications.getByProgram(options).catch((err) => console.log(err));
       if (apps.statusCode !== 200) {
         console.log(apps);
       }
