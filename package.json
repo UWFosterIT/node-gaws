@@ -1,6 +1,6 @@
 {
   "name": "uwgaws",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Client Library for University of Washington's Person Web Service",
   "bugs:": {
     "url": "https://github.com/UWFosterIT/node-gaws/issues"
@@ -21,21 +21,22 @@
   ],
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "aws-sdk": "^2.845.0",
-    "got": "^11.8.1",
+    "@types/got": "^9.6.11",
+    "aws-sdk": "^2.859.0",
+    "got": "^11.8.2",
     "micro-cache": "^3.0.3",
-    "query-string": "^6.14.0"
+    "query-string": "^6.14.1"
   },
   "devDependencies": {
     "@types/log4js": "^2.3.5",
-    "chai": "^4.3.0",
+    "chai": "^4.3.3",
     "debug": "^4.3.1",
-    "eslint": "^7.20.0",
+    "eslint": "^7.21.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-security": "^1.4.0",
     "log4js": "^6.3.0",
-    "mocha": "^8.3.0"
+    "mocha": "^8.3.1"
   },
   "scripts": {
     "lint": "eslint test/**/*.js --fix; exit 0;",
