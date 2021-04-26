@@ -44,7 +44,7 @@ describe('Graduate Applicant Web Service', () => {
         const applicants = await uwgaws.applicants.getByProgram(options);
         expect(applicants.statusCode).to.equal(200);
         expect(applicants.data.length).to.equal(totalApps);
-        application = applicants.data[0];
+        [application] = applicants.data;
       }
     });
   });
@@ -90,12 +90,12 @@ describe('Graduate Applicant Web Service', () => {
     });
   });
 
-  describe('Applications - Get By Program 19', () => {
+  describe('Applications - Get JSON By Program', () => {
     it('Should return a list of full applications', async () => {
       const options = {
-        gradProgId: 19,
-        quarter: 4,
-        year: 2021,
+        gradProgId: programId,
+        quarter,
+        year,
       };
       const apps = await uwgaws.applications.getByProgram(options).catch((err) => console.log(err));
       if (apps.statusCode !== 200) {
