@@ -6,6 +6,7 @@ class Applications extends Service {
     const params = {
       applId: opt.id,
       format: opt.format || 'json',
+      type: opt.type || 1,
     };
     const query = qs.stringify(params);
     return this.get(`applications?${query}`);

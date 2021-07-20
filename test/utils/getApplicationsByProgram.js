@@ -11,9 +11,9 @@ config.baseUrl = 'https://webapps.grad.uw.edu/services/applicants/v3/api/';
 const doQuery = async () => {
   await uwgaws.initialize(config);
   const options = {
-    gradProgId: 800,
+    gradProgId: 671,
     quarter: 4,
-    year: 2022,
+    year: 2021,
   };
   const applications = await uwgaws.applications.getByProgram(options);
   console.log(inspect(applications.data));

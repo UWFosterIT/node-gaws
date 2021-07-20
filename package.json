@@ -1,6 +1,6 @@
 {
   "name": "uwgaws",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "description": "Client Library for University of Washington's Person Web Service",
   "bugs:": {
     "url": "https://github.com/UWFosterIT/node-gaws/issues"
@@ -22,7 +22,7 @@
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
     "@types/got": "^9.6.11",
-    "aws-sdk": "^2.892.0",
+    "aws-sdk": "^2.907.0",
     "got": "^11.8.2",
     "micro-cache": "^3.0.3",
     "query-string": "^7.0.0"
@@ -31,19 +31,17 @@
     "@types/log4js": "^2.3.5",
     "chai": "^4.3.4",
     "debug": "^4.3.1",
-    "eslint": "^7.25.0",
+    "eslint": "^7.26.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.23.2",
     "eslint-plugin-security": "^1.4.0",
+    "fast-xml-parser": "^3.19.0",
     "log4js": "^6.3.0",
-    "mocha": "^8.3.2"
+    "mocha": "^8.4.0"
   },
   "scripts": {
     "lint": "eslint test/**/*.js --fix; exit 0;",
-    "test": "./node_modules/.bin/mocha --timeout 30s --bail test/unit/*.js"
-  },
-  "engines": {
-    "node": ">=8.10.0"
+    "test": "./node_modules/.bin/mocha --timeout 60s test/unit/*.js"
   },
   "eslintConfig": {
     "env": {

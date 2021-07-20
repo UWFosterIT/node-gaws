@@ -1,4 +1,5 @@
 /* eslint no-undef: "off" */
+const xmlParser = require('fast-xml-parser');
 require('../setup');
 const { inspect } = require('util');
 
@@ -55,6 +56,20 @@ describe('Graduate Applicant Web Service', () => {
       expect(app.statusCode).to.equal(200);
       expect(app.data.id).to.equal(application.id);
       expect(app.data.gradprogID).to.equal(programId);
+    });
+  });
+
+  describe('Applications - Get XML By Id', () => {
+    it('Should return a full XML application when sent a valid application Id', async () => {
+      const app = await uwgaws.applications.getById({
+        id: application.id,
+        format: 'xml',
+      });
+
+      jsonApp = xmlParser.parse(app.data);
+      expect(app.statusCode).to.equal(200);
+      expect(jsonApp.applicationContainer.id).to.equal(application.id);
+      expect(jsonApp.applicationContainer.gradprogID).to.equal(programId);
     });
   });
 

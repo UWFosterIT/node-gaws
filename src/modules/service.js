@@ -1,5 +1,6 @@
 const got = require('got');
 const { inspect } = require('util');
+const { version } = require('../../package.json');
 
 inspect.defaultOptions.depth = null;
 
@@ -19,6 +20,10 @@ class Service {
       },
       url: this.config.baseUrl + endpoint,
       uriCache: endpoint.replace(/\//g, ''),
+      headers: {
+        'User-Agent': `FosterIT-GAWS/${version}`,
+        Accept: 'application/json',
+      },
     };
   }
 
