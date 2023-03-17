@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base"
+  ],
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json",
+      "./tsconfig.eslint.json"
+    ],
+    "extraFileExtensions": [
+      ".cjs"
+    ]
+  },
+  "ignorePatterns": [
+    "dist"
+  ]
+}

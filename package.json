@@ -1,58 +1,43 @@
 {
-  "name": "uwgaws",
-  "version": "5.2.0",
-  "description": "Client Library for University of Washington's Person Web Service",
-  "bugs:": {
-    "url": "https://github.com/UWFosterIT/node-gaws/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/UWFosterIT/node-gaws/"
-  },
-  "author": "Douglas Gale",
-  "main": "src/index.js",
-  "keywords": [
-    "uw",
-    "graduate",
-    "applicant",
-    "web",
-    "service",
-    "gaws"
-  ],
-  "dependencies": {
-    "@log4js-node/log4js-api": "^1.0.2",
-    "@types/got": "^9.6.11",
-    "aws-sdk": "^2.907.0",
-    "got": "^11.8.2",
-    "micro-cache": "^3.0.3",
-    "query-string": "^7.0.0"
-  },
-  "devDependencies": {
-    "@types/log4js": "^2.3.5",
-    "chai": "^4.3.4",
-    "debug": "^4.3.1",
-    "eslint": "^7.26.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.2",
-    "eslint-plugin-security": "^1.4.0",
-    "fast-xml-parser": "^3.19.0",
-    "log4js": "^6.3.0",
-    "mocha": "^8.4.0"
-  },
+  "name": "node-gaws",
+  "version": "6.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
-    "lint": "eslint test/**/*.js --fix; exit 0;",
-    "test": "./node_modules/.bin/mocha --timeout 60s test/unit/*.js"
+    "test": "jest",
+    "prebuild": "node -p \"'export const LIB_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/version.ts",
+    "build": "npm run prebuild && tsc",
+    "lint": "eslint src/**/* --fix",
+    "prepare": "tsc",
+    "prepublishOnly": "npm run build"
   },
-  "eslintConfig": {
-    "env": {
-      "mocha": true
-    },
-    "extends": [
-      "airbnb-base",
-      "plugin:security/recommended"
-    ]
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.0",
+    "@jest/globals": "^29.5.0",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.15.3",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "babel-jest": "^29.5.0",
+    "eslint": "^8.36.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "jest": "^29.5.0",
+    "jest-environment-node": "^29.5.0",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
   },
-  "plugins": [
-    "security"
-  ]
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.293.0",
+    "aws-sdk": "^2.1337.0",
+    "got": "^12.6.0",
+    "micro-cache": "^3.0.3",
+    "ts-custom-error": "^3.3.1",
+    "tslog": "^4.8.2"
+  }
 }

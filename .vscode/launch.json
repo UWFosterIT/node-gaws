@@ -5,21 +5,36 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
+      "command": "npm test",
+      "name": "Run npm test",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "name": "Launch via NPM",
+      "request": "launch",
+      "runtimeArgs": [
+        "test",
+        "debug"
+      ],
+      "runtimeExecutable": "npm",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "pwa-node"
+    },
+    {
+      "type": "pwa-node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-      "args": [
-        "--timeout",
-        "10s",
-        "--colors",
-        "${workspaceFolder}/test/unit/*.js"
-    ],
-    "skipFiles": [
-      "${workspaceRoot}/node_modules/**/*.js",
-      "<node_internals>/**/*.js"
-    ],
-    "internalConsoleOptions": "openOnSessionStart"
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/jest",
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ]
     }
   ]
 }
