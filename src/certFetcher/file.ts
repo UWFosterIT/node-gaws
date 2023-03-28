@@ -19,8 +19,8 @@ export default class FileCertFetcher implements ICertFetcher {
         throw Error(`Key file '${opts.key}' does not exist or is not accessible`);
       });
     return {
-      cert: cert.toString(),
-      key: key.toString(),
+      cert,
+      key,
     };
   }
 }

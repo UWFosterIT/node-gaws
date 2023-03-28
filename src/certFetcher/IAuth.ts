@@ -1,4 +1,4 @@
 export interface IAuth {
-  cert: string,
-  key: string,
+  cert: string | Buffer,
+  key: string | Buffer,
 }
