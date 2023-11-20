@@ -1,6 +1,6 @@
 import File from './file.js';
 import S3 from './s3.js';
-import { ICertFetcher } from './ICertFetcher';
+import { ICertFetcher } from './ICertFetcher.js';
 import FetcherError from './error.js';
 
 interface IFetcherStrategy {

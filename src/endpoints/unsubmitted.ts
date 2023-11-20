@@ -1,5 +1,5 @@
 import Endpoint from '../core/endpoint.js';
-import { IUnsubmitted } from '../entities/IUnsubmitted';
+import { IUnsubmitted } from '../entities/IUnsubmitted.js';
 
 export default class GradProgram extends Endpoint {
   getAll() {

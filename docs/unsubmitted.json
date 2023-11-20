@@ -1,19 +1,28 @@
 {
-  "id": 1000051223,
-  "appl_user_id": 802615,
-  "gradprogID": 802,
-  "firstname": "HARSHA",
-  "lastname": "-",
-  "PreferredFirstName": null,
-  "PreferredMiddleName": null,
-  "PreferredLastName": null,
-  "LegalFirstName": "HARSHA",
-  "LegalLastName": "-",
-  "LegalMiddleName": null,
-  "email": "harshasingh1525@gmail.com",
-  "appl_year": 2022,
-  "appl_qtr": 3,
-  "last_change_date": "2021-09-27T15:00:49.25",
-  "last_login_date": "2021-09-27T21:48:51.903",
-  "started_date": "2021-09-27T15:00:49.733"
+  "Application": {
+    "ApplicationID": 2000000319,
+    "SlateApplicationReferenceID": "684255141",
+    "SlateApplicationGUID": "61bffbd9-4dc1-43c8-b160-3adc34e4e2af",
+    "CloneSourceGUID": null,
+    "ApplicationYear": 2024,
+    "ApplicationQuarter": 4,
+    "ApplicationType": "G",
+    "SlatePersonReferenceID": 451391974,
+    "Email": "albertwachira15@gmail.com",
+    "DegreeIDApplication": 108597,
+    "DegreeCodeApplication": "0-E-MBA-00-27",
+    "ApplicationLastChangeDate": "2023-08-01T12: 54: 55",
+    "ApplicationSubmitDate": null,
+    "IsVisitingGrad": false,
+    "ApplicationStartDate": "2023-07-10T03: 28: 38"
+  },
+  "Person": {
+    "OfficialFirstName": "Albert",
+    "OfficialMiddleName": null,
+    "OfficialLastName": "Waithima",
+    "PreferredFirstName": "Albert",
+    "PreferredMiddleName": null,
+    "PreferredLastName": "Waithima",
+    "LastChangeDate": "2023-07-10T08: 54: 02.5117739"
+  }
 }

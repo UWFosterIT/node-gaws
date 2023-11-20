@@ -28,6 +28,6 @@ describe('Grad Program', () => {
     const response = <IGradProgram[]>programResponse.data;
 
     expect(programResponse.result).toBe('success');
-    expect(response[0]).toHaveProperty('gradprogID');
+    expect(response[0]).toHaveProperty('DegreeCode');
   });
 });

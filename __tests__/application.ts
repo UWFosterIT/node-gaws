@@ -1,21 +1,17 @@
 import { ICertFetcher } from '../src/certFetcher/ICertFetcher.js';
 import { Gaws, CertFetcherManager } from '../src/index.js';
 import { IGradProgram } from '../src/entities/IGradProgram';
-import { IApplication } from '../src/entities/IApplication';
+import { IApplication, IProgramOptions } from '../src/entities/IApplication';
 import config from './config.js';
 import { LogLevel } from '../src/IGawsOptions';
 
-jest.setTimeout(20000);
+jest.setTimeout(60000);
 
 let fetcher: ICertFetcher;
 let auth;
 let gaws: Gaws;
-let program: {
-  gradProgId: number,
-  year: number,
-  quarter: 1 | 2 | 3 | 4,
-  type?: 1
-};
+let program: IProgramOptions;
+
 let applicationId: number;
 
 describe('Application', () => {
@@ -36,37 +32,25 @@ describe('Application', () => {
     const gradProgramResponse = <IGradProgram[]>gradPrograms.data;
     const gradProgram = gradProgramResponse[0];
     program = {
-      gradProgId: config.testProgramId,
-      year: gradProgram.submitted_applications[0].year,
-      quarter: gradProgram.submitted_applications[0].quarter,
+      degreeId: config.degreeId,
+      year: gradProgram.SubmittedApplications[0].Year,
+      quarter: gradProgram.SubmittedApplications[0].Quarter,
     };
   });
 
-  test('get applications by program, year, quarter should return many applications type=1', async () => {
+  test('get applications by program, year, quarter should return many applications', async () => {
     const applicationResponse = await gaws.applications.getByProgram(program);
 
     const response = <IApplication[]>applicationResponse.data;
 
     expect(applicationResponse.result).toBe('success');
-    expect(response[0]).toHaveProperty('user');
+    expect(response[0]).toHaveProperty('Person');
 
-    applicationId = response[0].id!;
+    applicationId = response[0].ApplicationDetail.ApplicationID!;
   });
 
-  test('slow get applications by program, year, quarter should return many applications: no type', async () => {
-    const applicationResponse = await gaws.applications.getByProgramSlow(program);
-
-    const response = <IApplication[]>applicationResponse.data;
-
-    expect(applicationResponse.result).toBe('success');
-    expect(response[0]).toHaveProperty('user');
-
-    delete program.type;
-
-    applicationId = response[0].id!;
-  });
-
-  test('get application by id type=1', async () => {
+  // This test requires the applicationId from the previous test.
+  test('get application by id', async () => {
     const applicationResponse = await gaws.applications.getById({
       id: applicationId,
     });
@@ -74,17 +58,6 @@ describe('Application', () => {
     const response = <IApplication>applicationResponse.data;
 
     expect(applicationResponse.result).toBe('success');
-    expect(response).toHaveProperty('user');
-  });
-
-  test('slow get application by id: no type', async () => {
-    const applicationResponse = await gaws.applications.getByIdSlow({
-      id: applicationId,
-    });
-
-    const response = <IApplication>applicationResponse.data;
-
-    expect(applicationResponse.result).toBe('success');
-    expect(response).toHaveProperty('user');
+    expect(response).toHaveProperty('Person');
   });
 });

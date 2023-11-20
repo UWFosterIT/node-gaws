@@ -3,19 +3,15 @@ import { Gaws, CertFetcherManager } from '../src/index.js';
 import { IApplicant } from '../src/entities/IApplicant';
 import { IGradProgram } from '../src/entities/IGradProgram';
 import { LogLevel } from '../src/IGawsOptions';
-// @ts-ignore
 import config from './config.js';
+import { IProgramOptions } from '../src/entities/IApplication.js';
 
 jest.setTimeout(20000);
 
 let fetcher: ICertFetcher;
 let auth;
 let gaws: Gaws;
-let program: {
-  gradProgId: number,
-  year: number,
-  quarter: 1 | 2 | 3 | 4,
-};
+let program: IProgramOptions;
 
 describe('Applicant', () => {
   beforeAll(async () => {
@@ -35,9 +31,9 @@ describe('Applicant', () => {
     const gradProgramResponse = <IGradProgram[]>gradPrograms.data;
     const [gradProgram] = gradProgramResponse;
     program = {
-      gradProgId: gradProgram.gradprogID,
-      year: gradProgram.submitted_applications[0].year,
-      quarter: gradProgram.submitted_applications[0].quarter,
+      degreeId: gradProgram.DegreeID,
+      year: gradProgram.SubmittedApplications[0].Year,
+      quarter: gradProgram.SubmittedApplications[0].Quarter,
     };
   });
 
@@ -47,6 +43,6 @@ describe('Applicant', () => {
     const response = <IApplicant[]>applicantResponse.data;
 
     expect(applicantResponse.result).toBe('success');
-    expect(response[0]).toHaveProperty('firstname');
+    expect(response[0].PersonDetail).toHaveProperty('OfficialFirstName');
   });
 });

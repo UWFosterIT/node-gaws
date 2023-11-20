@@ -4,16 +4,16 @@ import GradProgram from './endpoints/gradprogram.js';
 import Application from './endpoints/application.js';
 import Applicant from './endpoints/applicant.js';
 import Unsubmitted from './endpoints/unsubmitted.js';
-import { IGawsOptions } from './IGawsOptions';
+import { IGawsOptions } from './IGawsOptions.js';
 
 export { CertFetcherManager } from './certFetcher/cert-fetcher-manager.js';
-export { ICertFetcher } from './certFetcher/ICertFetcher';
-export { IApiError } from './modules/IService';
-export { IGradProgram } from './entities/IGradProgram';
-export { IApplicant } from './entities/IApplicant';
-export { IApplication } from './entities/IApplication';
-export { IUnsubmitted } from './entities/IUnsubmitted';
-export { IAuth } from './certFetcher/IAuth';
+export { ICertFetcher } from './certFetcher/ICertFetcher.js';
+export { IApiError } from './modules/IService.js';
+export { IGradProgram } from './entities/IGradProgram.js';
+export { IApplicant } from './entities/IApplicant.js';
+export { IApplication } from './entities/IApplication.js';
+export { IUnsubmitted } from './entities/IUnsubmitted.js';
+export { IAuth } from './certFetcher/IAuth.js';
 
 enum LogLevel {
   silly,

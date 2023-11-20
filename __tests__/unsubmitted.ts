@@ -4,18 +4,14 @@ import { IGradProgram } from '../src/entities/IGradProgram';
 import { IUnsubmitted } from '../src/entities/IUnsubmitted';
 import config from './config.js';
 import { LogLevel } from '../src/IGawsOptions';
+import { IProgramOptions } from '../src/entities/IApplication.js';
 
 jest.setTimeout(20000);
 
 let fetcher: ICertFetcher;
 let auth;
 let gaws: Gaws;
-let program: {
-  gradProgId: number,
-  year: number,
-  quarter: 1 | 2 | 3 | 4,
-  type?: 1
-};
+let program: IProgramOptions;
 
 describe('Unsubmitted', () => {
   beforeAll(async () => {
@@ -35,9 +31,9 @@ describe('Unsubmitted', () => {
     const gradProgramResponse = <IGradProgram[]>gradPrograms.data;
     const gradProgram = gradProgramResponse[0];
     program = {
-      gradProgId: config.testProgramId,
-      year: gradProgram.submitted_applications[0].year,
-      quarter: gradProgram.submitted_applications[0].quarter,
+      degreeId: config.degreeId,
+      year: gradProgram.SubmittedApplications[0].Year,
+      quarter: gradProgram.SubmittedApplications[0].Quarter,
     };
   });
 
@@ -47,15 +43,17 @@ describe('Unsubmitted', () => {
     const response = <IUnsubmitted[]>applicationResponse.data;
 
     expect(applicationResponse.result).toBe('success');
-    expect(response[0]).toHaveProperty('gradprogID');
+    expect(response[0].Person).toHaveProperty('OfficialFirstName');
+    expect(response.length > 0).toBe(true);
   });
 
-  test('get applications by program, year, quarter should return many applications type=1', async () => {
-    const applicationResponse = await gaws.unsubmitted.getByProgramId(program.gradProgId);
+  test('get applications by program, year, quarter should return many applications', async () => {
+    const applicationResponse = await gaws.unsubmitted.getByProgramId(program.degreeId);
 
     const response = <IUnsubmitted[]>applicationResponse.data;
 
     expect(applicationResponse.result).toBe('success');
-    expect(response[0]).toHaveProperty('gradprogID');
+    expect(response[0].Application).toHaveProperty('DegreeCodeApplication');
+    expect(response.length > 0).toBe(true);
   });
 });

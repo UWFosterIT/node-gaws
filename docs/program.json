@@ -1,0 +1,24 @@
+{
+  "DegreeID": 106850,
+  "DegreeCode": "0-E-ACCTGX-01-27",
+  "CampusCode": 0,
+  "CollegeCode": "E",
+  "MajorCode": "ACCTGX",
+  "Pathway": 1,
+  "DegreeLevel": 2,
+  "DegreeType": 7,
+  "SlateProgramMarketingName": "Accounting (MPAcc) - Seattle",
+  "ProgramStatus": "Active",
+  "ProgramURL": "http: //foster.uw.edu/academics/degree-programs/master-of-professional-accounting/",
+  "SlateProgramURL": "https: //apply.grad.uw.edu/manage/lookup/record?id=2efecacf-a750-d387-1e4d-ea2b7bccf446",
+  "SlateProgramVisitingGradURL": null,
+  "SlateProgramLastUpdate": "2023-09-01T12: 02: 27",
+  "SubmittedApplications": [
+    {
+      "Year": 2024,
+      "Quarter": 4,
+      "SubmittedCount": 2,
+      "GAWSuri": "https: //webapps.grad.uw.edu/services/applicants/v4/api/applications?degree=106850&year=2024&quarter=4"
+    }
+  ]
+}
