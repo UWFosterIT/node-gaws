@@ -13,8 +13,7 @@ export default class Application extends Endpoint {
   getByProgram(options: IProgramOptions) {
     const params = {
       format: 'json',
-      type: 1,
-      gradprogid: options.degreeId,
+      degree: options.degreeId,
       quarter: options.quarter,
       year: options.year,
     };

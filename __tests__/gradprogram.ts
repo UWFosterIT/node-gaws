@@ -1,5 +1,5 @@
 import { inspect } from 'util';
-import { IGradProgram } from '../src/entities/IGradProgram';
+import { IProgram } from '../src/entities/IProgram';
 import { LogLevel } from '../src/IGawsOptions';
 import { Gaws, CertFetcherManager } from '../src/index.js';
 // @ts-ignore
@@ -25,7 +25,7 @@ describe('Grad Program', () => {
 
     const programResponse = await gaws.programs.getAuthorized();
 
-    const response = <IGradProgram[]>programResponse.data;
+    const response = <IProgram[]>programResponse.data;
 
     expect(programResponse.result).toBe('success');
     expect(response[0]).toHaveProperty('DegreeCode');

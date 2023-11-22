@@ -1,8 +1,8 @@
 import Endpoint from '../core/endpoint.js';
-import { IGradProgram } from '../entities/IGradProgram.js';
+import { IProgram } from '../entities/IProgram.js';
 
 export default class GradProgram extends Endpoint {
   getAuthorized() {
-    return this.service.get<IGradProgram[]>('gradprograms/?format=json');
+    return this.service.get<IProgram[]>('gradprograms/?format=json');
   }
 }

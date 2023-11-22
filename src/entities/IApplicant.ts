@@ -1,6 +1,6 @@
 export interface IProgramOptions {
   degreeId: number,
-  quarter: 1 | 2 | 3 | 4,
+  quarter: number,
   year: number,
 }
 
