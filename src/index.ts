@@ -9,7 +9,7 @@ import { IGawsOptions } from './IGawsOptions.js';
 export { CertFetcherManager } from './certFetcher/cert-fetcher-manager.js';
 export { ICertFetcher } from './certFetcher/ICertFetcher.js';
 export { IApiError } from './modules/IService.js';
-export { IGradProgram } from './entities/IProgram.js';
+export { IProgram } from './entities/IProgram.js';
 export { IApplicant } from './entities/IApplicant.js';
 export { IApplication } from './entities/IApplication.js';
 export { IUnsubmitted } from './entities/IUnsubmitted.js';

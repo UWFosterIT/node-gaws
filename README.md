@@ -1,10 +1,8 @@
 # UW Graduate Applicant Web Service
 
-Version 6 is a complete rewrite and has many breaking changes from previous versions.
+This package implements the [v4 Graduate Applicant Webservice](https://webapps.grad.uw.edu/services/applicants/v4/documentation/servicesApplicants.xml) API for Node.js.
 
-This implements the [v3 Graduate Applicant Webservice](https://devweb.grad.uw.edu/services/documentation/version3api.html).
-
-Note: Version 6.0.0 and later require Node 14.19 or later.
+Note: node-gaws version 7 supports GAWS api V4. Use node-gaws 6.x for GAWS api V3.
 
 ## USE
 
@@ -25,7 +23,7 @@ import { Gaws } from 'node-gaws';
 
 const gaws = new Gaws({
   organizationName: 'My Organization Name',
-  baseUrl: 'https://testweb.grad.uw.edu/services/applicants/v3/api/',
+  baseUrl: 'https://testweb.grad.uw.edu/services/applicants/v4/api/',
   auth: {
     cert: 'your certificate data',
     key: 'your key data'
@@ -41,7 +39,7 @@ console.log(gawsApiResponse.data);
 
 ### Certificate Helpers
 
-Usually you do not want to put certificates and other secrets in your code. You can implement your own certificate data retrieval and supply it directly to Gaws. The GAWS library provides two helper certificate fetchers for retrieving certificate information: file and AWS S3. These helpers are accessed via the certificate fetcher manager.
+Usually you do not want to put certificates and other secrets in your code. You can implement your own certificate data retrieval and supply it directly to Gaws. This GAWS API package provides two helper certificate fetchers for retrieving certificate information: file and AWS S3. These helpers are accessed via the certificate fetcher manager.
 
 You can create your own cert fetchers and add them dynamically to the certificate fetcher manager. See the certFetcher tests for examples how to add custom fetchers.
 
