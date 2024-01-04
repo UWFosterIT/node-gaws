@@ -1,7 +1,7 @@
 import { ICertFetcher } from '../src/certFetcher/ICertFetcher.js';
 import { Gaws, CertFetcherManager } from '../src/index.js';
 import { IApplicant } from '../src/entities/IApplicant';
-import { IGradProgram } from '../src/entities/IGradProgram';
+import { IProgram } from '../src/entities/IProgram';
 import { LogLevel } from '../src/IGawsOptions';
 import config from './config.js';
 import { IProgramOptions } from '../src/entities/IApplication.js';
@@ -28,7 +28,7 @@ describe('Applicant', () => {
     });
 
     const gradPrograms = await gaws.programs.getAuthorized();
-    const gradProgramResponse = <IGradProgram[]>gradPrograms.data;
+    const gradProgramResponse = <IProgram[]>gradPrograms.data;
     const [gradProgram] = gradProgramResponse;
     program = {
       degreeId: gradProgram.DegreeID,
