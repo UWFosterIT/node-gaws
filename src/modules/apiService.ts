@@ -2,8 +2,8 @@ import { Logger } from 'tslog';
 import got, {
   Got, isResponseOk, Options, PlainResponse,
 } from 'got';
+import { version } from '../../package.json';
 import { IApiError, IApiResponse, ApiResult } from './IService.js';
-import { LIB_VERSION } from '../version.js';
 
 export default class Service {
   private got: Got;
@@ -19,10 +19,11 @@ export default class Service {
       },
       prefixUrl: config.baseUrl,
       headers: {
-        'User-Agent': `${config.organizationName}/${LIB_VERSION}`,
+        'User-Agent': `Foster-GAWS-SDK-${version}/${config.organizationName}`,
         Accept: 'application/json',
       },
     });
+    console.log(options.headers);
     this.got = got.extend(options);
   }
 
