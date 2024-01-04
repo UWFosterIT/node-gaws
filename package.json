@@ -7,8 +7,7 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "prebuild": "node -p \"'export const LIB_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/version.ts",
-    "build": "npm run prebuild && tsc",
+    "build": "tsc",
     "lint": "eslint src/**/* --fix",
     "prepare": "tsc",
     "prepublishOnly": "npm run build"
