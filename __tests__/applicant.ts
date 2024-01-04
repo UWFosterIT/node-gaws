@@ -38,7 +38,7 @@ describe('Applicant', () => {
   });
 
   test('Get applicants by program, year, quarter should return many applicants', async () => {
-    const applicantResponse = await gaws.applicants.getByProgram(program);
+    const applicantResponse = await gaws.applicants.getByDegreeId(program);
 
     const response = <IApplicant[]>applicantResponse.data;
 
