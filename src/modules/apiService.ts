@@ -2,8 +2,11 @@ import { Logger } from 'tslog';
 import got, {
   Got, isResponseOk, Options, PlainResponse,
 } from 'got';
-import { version } from '../../package.json' with {type: 'json'};
+// @ts-ignore
+import packageInfo from '../../package.json' with {type: 'json'};
 import { IApiError, IApiResponse, ApiResult } from './IService.js';
+
+const { version } = packageInfo;
 
 export default class Service {
   private got: Got;
