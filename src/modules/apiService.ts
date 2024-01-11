@@ -2,7 +2,7 @@ import { Logger } from 'tslog';
 import got, {
   Got, isResponseOk, Options, PlainResponse,
 } from 'got';
-import { version } from '../../package.json';
+import { version } from '../../package.json' with {type: 'json'};
 import { IApiError, IApiResponse, ApiResult } from './IService.js';
 
 export default class Service {
@@ -23,7 +23,7 @@ export default class Service {
         Accept: 'application/json',
       },
     });
-    console.log(options.headers);
+
     this.got = got.extend(options);
   }
 
