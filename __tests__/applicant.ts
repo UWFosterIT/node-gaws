@@ -38,7 +38,16 @@ describe('Applicant', () => {
   });
 
   test('Get applicants by program, year, quarter should return many applicants', async () => {
-    const applicantResponse = await gaws.applicants.getByDegreeId(program);
+    const applicantResponse = await gaws.applicants.get(program);
+
+    const response = <IApplicant[]>applicantResponse.data;
+
+    expect(applicantResponse.result).toBe('success');
+    expect(response[0].PersonDetail).toHaveProperty('OfficialFirstName');
+  });
+
+  test('should get all applicants.', async () => {
+    const applicantResponse = await gaws.applicants.get();
 
     const response = <IApplicant[]>applicantResponse.data;
 
