@@ -7,13 +7,13 @@ import Unsubmitted from './endpoints/unsubmitted.js';
 import { IGawsOptions } from './IGawsOptions.js';
 
 export { CertFetcherManager } from './certFetcher/cert-fetcher-manager.js';
-export { ICertFetcher } from './certFetcher/ICertFetcher.js';
-export { IApiError } from './modules/IService.js';
-export { IProgram } from './entities/IProgram.js';
-export { IApplicant } from './entities/IApplicant.js';
-export { IApplication } from './entities/IApplication.js';
-export { IUnsubmitted } from './entities/IUnsubmitted.js';
-export { IAuth } from './certFetcher/IAuth.js';
+export type { ICertFetcher } from './certFetcher/ICertFetcher.js';
+export type { IApiError } from './modules/IService.js';
+export type { IProgram } from './entities/IProgram.js';
+export type { IApplicant } from './entities/IApplicant.js';
+export type { IApplication } from './entities/IApplication.js';
+export type { IUnsubmitted } from './entities/IUnsubmitted.js';
+export type { IAuth } from './certFetcher/IAuth.js';
 
 enum LogLevel {
   silly,
