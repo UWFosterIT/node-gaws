@@ -4,6 +4,8 @@
     "@tsconfig/strictest/tsconfig.json",
   ],
   "compilerOptions": {
+    "target": "ES6",
+    "module": "Node16",
     "sourceMap": true, /* Generates corresponding '.map' file. */
     "outDir": "./dist", /* Redirect output structure to the directory. */
     "rootDir": "./src", /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */

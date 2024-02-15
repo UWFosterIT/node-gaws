@@ -120,8 +120,8 @@ interface Person {
   SlatePersonURL: string;
   Contact: Contact;
   Education: Education[];
-  Employment: any[];
-  Tests: any[];
+  Employment: Employment[];
+  Tests: Test[];
 }
 
 interface Contact {
@@ -187,4 +187,41 @@ interface Education {
   OfficialTranscriptReceiveDate: null;
   OfficialTranscriptUpdateDate: null;
   OfficialTranscriptViewerURL: null;
+}
+
+interface Employment {
+  EmploymentGUID: string;
+  EmployerName: string;
+  EmployeeTitle: string;
+  EmploymentStartDate: string;
+  EmploymentEndDate?: string;
+  EmployerCity: string;
+  EmployerRegion: string;
+  EmployerCountryNameSDB: string;
+  EmployerCountryNameISO3166: string;
+  EmployerCountryNameGENCShort: string;
+  EmploymentPaidType: string;
+  EmploymentDescription: string;
+  EmploymentTotalHoursInRole: number;
+  EmploymentHoursPerWeek: string;
+  EmploymentRank: number;
+  GeneticCounselingExperience?: any;
+}
+
+interface Test {
+  TestKey: string;
+  SDBTestCode: string;
+  SDBTestTypeName: string;
+  SlateTestID: string;
+  SlateTestName: string;
+  SlateTestSubTypeCode: string;
+  TestDate: string;
+  TestEnteredDate: string;
+  Scores: Score[];
+}
+
+interface Score {
+  TestComponent: string;
+  TestScore: number;
+  TestPercentile: number;
 }
