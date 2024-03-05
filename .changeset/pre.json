@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "node-gaws": "8.0.0-beta.8"
+  },
+  "changesets": []
+}
