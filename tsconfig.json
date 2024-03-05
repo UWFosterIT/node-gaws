@@ -4,8 +4,6 @@
     "@tsconfig/strictest/tsconfig.json",
   ],
   "compilerOptions": {
-    "target": "ES6",
-    "module": "Node16",
     "allowJs": true, /* Allow javascript files to be compiled. */
     "declaration": true, /* Generates corresponding '.d.ts' file. */
     "sourceMap": true, /* Generates corresponding '.map' file. */
@@ -13,6 +11,7 @@
     "rootDir": "./src", /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     "importHelpers": true, /* Import emit helpers from 'tslib'. */
     "resolveJsonModule": true,
+    "noEmit": true,
     "types": [
       "node",
       "jest"
