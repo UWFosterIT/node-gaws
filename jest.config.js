@@ -9,7 +9,7 @@ export default {
   testEnvironment: 'node',
 
   transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!(got|p-cancelable|@szmarczak|lowercase-keys|@sindresorhus|cacheable-request|normalize-url|responselike|mimic-response|form-data-encoder|cacheable-lookup|tslog)/)',
+    '<rootDir>/node_modules/(?!(got|get-stream|p-cancelable|@szmarczak|lowercase-keys|@sindresorhus|cacheable-request|normalize-url|responselike|mimic-response|form-data-encoder|cacheable-lookup|tslog)/)',
   ],
   testPathIgnorePatterns: [
     'config.ts',
