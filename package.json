@@ -1,6 +1,6 @@
 {
   "name": "node-gaws",
-  "version": "8.0.0-beta.9",
+  "version": "8.0.0-beta.10",
   "description": "",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
