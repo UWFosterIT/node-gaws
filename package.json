@@ -2,13 +2,13 @@
   "name": "node-gaws",
   "version": "8.0.0-beta.10",
   "description": "",
-  "main": "dist/index.cjs",
+  "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
     "test": "jest",
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "tsup src/index.ts --format esm,cjs --dts",
     "lint": "eslint src/**/* --fix"
   },
   "author": "",
