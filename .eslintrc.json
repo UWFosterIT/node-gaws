@@ -8,9 +8,6 @@
     "project": [
       "./tsconfig.json",
       "./tsconfig.eslint.json"
-    ],
-    "extraFileExtensions": [
-      ".cjs"
     ]
   },
   "ignorePatterns": [
