@@ -16,10 +16,6 @@ export default class Service {
   constructor(config: any, log: Logger<unknown>) {
     this.log = log;
     const options = new Options({
-      retry: {
-        limit: 3,
-        methods: ['GET'],
-      },
       https: {
         certificate: config.auth.cert,
         key: config.auth.key,
